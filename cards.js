@@ -3,7 +3,7 @@ const BASE_URL = "https://mone847.github.io/cards_assets/cards_img/";
 
 // 52枚分のカードURL配列を作成
 const cardList = [];
-for (let i = 1; i <= 52; i++) {
+for (let i = 0; i <= 52; i++) {
   cardList.push(`${BASE_URL}c${i}.svg`);
 }
 
