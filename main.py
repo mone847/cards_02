@@ -27,7 +27,7 @@ def shuffle_and_show(event=None):
 
 
 # ボタンにハンドラ登録
-shuffle_btn.addEventListener("click", shuffle_and_show)
+# shuffle_btn.addEventListener("click", shuffle_and_show)
 
 # 初期表示もシャッフル結果にする
 shuffle_and_show()
