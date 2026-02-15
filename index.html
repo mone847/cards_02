@@ -27,7 +27,6 @@
 <body>
     <h1>数合わせゲーム</h1>
     <!-- カード2枚を並べるコンテナ -->
- <!-- カード2枚を並べるコンテナ -->
     <div id="card-container">
     <!-- 初期値はとりあえず c1, c2（どのみちPythonが上書きします） -->
         <img id="card1-img"
@@ -37,8 +36,10 @@
         <img id="card2-img"
          src="https://mone847.github.io/cards_assets/cards_img/c2.svg"
          alt="card 2">
-  </div>  <!-- シャッフルボタン（Python から制御） -->
-    <button id="shuffle-btn">Shuffle</button>
+    </div>  <!-- シャッフルボタン（Python から制御） -->
+    <button id="shuffle-btn" py-click="shuffle_and_show()">
+        Shuffle
+    </button>
     <script type="py" src="main.py"></script>
 </body>
 </html>
