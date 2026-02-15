@@ -18,8 +18,8 @@ def shuffle_and_show(event=None):
     random.shuffle(indices)  # in-place シャッフル[web:110][web:112][web:116][web:119]
 
     # 先頭2枚の URL を取得
-    first = cards.getUrl(indices[0])
-    second = cards.getUrl(indices[1])
+    first_url = cards.getUrl(indices[0])
+    second_url = cards.getUrl(indices[1])
 
     # img の src を更新
     img1.src = first_url
