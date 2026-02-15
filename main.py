@@ -57,5 +57,8 @@ async def _draw_async():
 def draw_two(event=None):
     asyncio.create_task(_draw_async())
 
+def reset_deck(event=None):
+    asyncio.create_task(_reset_async())
+    
 # 初期表示
 asyncio.create_task(_reset_async())
