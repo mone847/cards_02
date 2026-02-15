@@ -1,22 +1,40 @@
-// カード画像のベースURL（cards_assets リポジトリの GitHub Pages）
-const BASE_URL = "https://mone847.github.io/cards_assets/cards_img/";
+// cards.js
+// c0.svg = 裏面
+// c1.svg ～ c52.svg = 表面カード
 
-// 52枚分のカードURL配列を作成
-const cardList = [];
-for (let i = 0; i <= 52; i++) {
-  cardList.push(`${BASE_URL}c${i}.svg`);
-}
+(function () {
 
-// グローバルに公開（Python から参照）
-window.cards = {
-  list: cardList,
+  const BASE_URL = "https://mone847.github.io/cards_assets/cards_img/";
 
-  // index 番目のカードURLを返す関数
-  getUrl: function (index) {
-    // index が範囲外なら 0〜51 に丸める
-    const n = ((index % this.list.length) + this.list.length) % this.list.length;
-    return this.list[n];
-  },
+  const TOTAL_CARDS = 52;  // 表面は1～52
 
-  length: cardList.length
-};
+  window.cards = {
+
+    baseUrl: BASE_URL,
+
+    total: TOTAL_CARDS,
+
+    /**
+     * 指定番号のカードURLを返す
+     * @param {number} index
+     * 0 = 裏面 (c0.svg)
+     * 1～52 = 表面 (c1.svg～c52.svg)
+     */
+    getUrl: function (index) {
+
+      if (typeof index !== "number") {
+        console.error("index must be number");
+        return "";
+      }
+
+      if (index < 0 || index > TOTAL_CARDS) {
+        console.error("index out of range:", index);
+        return "";
+      }
+
+      return BASE_URL + "c" + index + ".svg";
+    }
+
+  };
+
+})();
