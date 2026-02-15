@@ -1,33 +1,27 @@
 from js import document, window
 import random
+import asyncio
 
-# JavaScript 側の cards オブジェクトを取得
-cards = window.cards
-
-# img 要素とボタン要素
 img1 = document.getElementById("card1-img")
 img2 = document.getElementById("card2-img")
-shuffle_btn = document.getElementById("shuffle-btn")
 
+async def _get_cards():
+    # cards.js が window.cards を作るまで待つ
+    while not hasattr(window, "cards"):
+        await asyncio.sleep(0)
+    return window.cards
 
-def shuffle_and_show(event=None):
-    """カードをシャッフルして先頭2枚を表示"""
-    # 0〜(枚数-1) のインデックスリストを作成
-    indices = list(range(cards.length))
-    # ランダムに並べ替え
-    random.shuffle(indices)  # in-place シャッフル[web:110][web:112][web:116][web:119]
+async def shuffle_and_show(event=None):
+    cards = await _get_cards()
 
-    # 先頭2枚の URL を取得
-    first_url = cards.getUrl(indices[0])
-    second_url = cards.getUrl(indices[1])
+    # JS の length を Python int に
+    n = int(cards.length)
 
-    # img の src を更新
-    img1.src = first_url
-    img2.src = second_url
+    indices = list(range(n))
+    random.shuffle(indices)
 
+    img1.src = cards.getUrl(indices[0])
+    img2.src = cards.getUrl(indices[1])
 
-# ボタンにハンドラ登録
-# shuffle_btn.addEventListener("click", shuffle_and_show)
-
-# 初期表示もシャッフル結果にする
-shuffle_and_show()
+# 初期表示もシャッフル
+asyncio.create_task(shuffle_and_show())
