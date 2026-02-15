@@ -22,8 +22,8 @@ def shuffle_and_show(event=None):
     second = cards.getUrl(indices[1])
 
     # img の src を更新
-    img1.src = first
-    img2.src = second
+    img1.src = first_url
+    img2.src = second_url
 
 
 # ボタンにハンドラ登録
