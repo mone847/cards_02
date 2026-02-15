@@ -28,7 +28,7 @@ async def _show_back():
 def _update_status():
     status.innerText = f"残りカード: {len(deck)}枚"
 
-async def reset_async():
+async def _reset_async():
     global deck
     await _show_back()
     deck = list(range(1, 53))  # c1～c52
