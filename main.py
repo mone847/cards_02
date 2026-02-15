@@ -25,7 +25,7 @@ async def _shuffle_async():
     try:
         cards = await _ensure_cards()
         n = int(cards.length)
-        i1, i2 = random.sample(range(n), 2)
+        i1, i2 = random.sample(range(n+1), 2)
         img1.src = cards.getUrl(i1)
         img2.src = cards.getUrl(i2)
     finally:
