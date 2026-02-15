@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>正の数・負の数の学習（中１）</title>
+
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+  <!-- カードリスト定義用 JavaScript -->
+  <script defer src="cards.js"></script>
+
+  <style>
+    body { font-family: sans-serif; }
+    #card-container {
+      margin-top: 20px;
+      display: flex;            /* 横並び */
+      gap: 20px;                /* カード間の隙間 */
+    }
+    #card-container img {
+      width: 150px;
+    }
+  </style>
+</head>
+
+<body>
+    <h1>数合わせゲーム</h1>
+    <!-- カード2枚を並べるコンテナ -->
+ <!-- カード2枚を並べるコンテナ -->
+    <div id="card-container">
+    <!-- 初期値はとりあえず c1, c2（どのみちPythonが上書きします） -->
+        <img id="card1-img"
+         src="https://mone847.github.io/cards_assets/cards_img/c1.svg"
+         alt="card 1">
+
+        <img id="card2-img"
+         src="https://mone847.github.io/cards_assets/cards_img/c2.svg"
+         alt="card 2">
+  </div>  <!-- シャッフルボタン（Python から制御） -->
+    <button id="shuffle-btn">Shuffle</button>
+    <script type="py" src="main.py"></script>
+</body>
+</html>
