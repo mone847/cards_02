@@ -5,23 +5,34 @@ import asyncio
 img1 = document.getElementById("card1-img")
 img2 = document.getElementById("card2-img")
 
-async def _get_cards():
-    # cards.js が window.cards を作るまで待つ
+_cards = None
+_busy = False
+
+async def _ensure_cards():
+    global _cards
+    if _cards is not None:
+        return _cards
     while not hasattr(window, "cards"):
         await asyncio.sleep(0)
-    return window.cards
+    _cards = window.cards
+    return _cards
 
-async def shuffle_and_show(event=None):
-    cards = await _get_cards()
+async def _shuffle_async():
+    global _busy
+    if _busy:
+        return
+    _busy = True
+    try:
+        cards = await _ensure_cards()
+        n = int(cards.length)
+        i1, i2 = random.sample(range(n), 2)
+        img1.src = cards.getUrl(i1)
+        img2.src = cards.getUrl(i2)
+    finally:
+        _busy = False
 
-    # JS の length を Python int に
-    n = int(cards.length)
+def shuffle_and_show(event=None):
+    asyncio.create_task(_shuffle_async())
 
-    indices = list(range(n))
-    random.shuffle(indices)
-
-    img1.src = cards.getUrl(indices[0])
-    img2.src = cards.getUrl(indices[1])
-
-# 初期表示もシャッフル
-asyncio.create_task(shuffle_and_show())
+# 初期表示（任意）
+asyncio.create_task(_shuffle_async())
