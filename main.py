@@ -24,6 +24,8 @@ async def _show_back():
     back = cards.getUrl(0)  # 裏面のカード画像URL
     img1.src = back
     img2.src = back
+    img1.classList.add("ready")
+    img2.classList.add("ready")
 
 def _update_status():
     status.innerText = f"残りカード: {len(deck)}枚"
@@ -59,6 +61,6 @@ def draw_two(event=None):
 
 def reset_deck(event=None):
     asyncio.create_task(_reset_async())
-    
+
 # 初期表示
 asyncio.create_task(_reset_async())
